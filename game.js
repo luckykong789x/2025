@@ -4,7 +4,10 @@ const ctx = canvas.getContext('2d');
 const keys = {
     left: false,
     right: false,
+ xq6vdf-codex/web上でマリオ風ゲーム作成
+
     up: false
+main
 };
 
 const gravity = 0.5;
@@ -21,9 +24,17 @@ class Player {
         this.jumping = false;
         this.speed = 2;
         this.color = '#ff0000';
+xq6vdf-codex/web上でマリオ風ゲーム作成
+        this.frame = 0; // used for simple leg animation
     }
 
     update() {
+        this.frame++;
+
+    }
+
+    update() {
+main
         // horizontal movement
         if (keys.left) {
             this.velX = -this.speed;
@@ -59,7 +70,22 @@ class Player {
 
     draw() {
         ctx.fillStyle = this.color;
+xq6vdf-codex/web上でマリオ風ゲーム作成
+        // body
         ctx.fillRect(this.x, this.y, this.width, this.height);
+
+        // head
+        ctx.beginPath();
+        ctx.arc(this.x + this.width / 2, this.y - 6, 6, 0, Math.PI * 2);
+        ctx.fill();
+
+        // simple leg animation using frame counter
+        const legOffset = Math.sin(this.frame / 5) * 2;
+        ctx.fillRect(this.x + 2, this.y + this.height, 4, 6 + legOffset);
+        ctx.fillRect(this.x + this.width - 6, this.y + this.height, 4, 6 - legOffset);
+
+        ctx.fillRect(this.x, this.y, this.width, this.height);
+ main
     }
 }
 
@@ -85,6 +111,10 @@ const platforms = [
 ];
 
 function handleInput(event, isKeyDown) {
+xq6vdf-codex/web上でマリオ風ゲーム作成
+    event.preventDefault();
+
+main
     switch (event.code) {
         case 'ArrowLeft':
         case 'KeyA':
